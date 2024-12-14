@@ -1,0 +1,615 @@
+[
+  {
+    "t": 0,
+    "running": 1,
+    "arrival": [
+      1,
+      2
+    ],
+    "dead": []
+  },
+  {
+    "t": 1,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 2,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 3,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 4,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 5,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 6,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 7,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 8,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 9,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 10,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 11,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 12,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 13,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 14,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 15,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 16,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 17,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 18,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 19,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 20,
+    "running": 1,
+    "arrival": [
+      1
+    ],
+    "dead": []
+  },
+  {
+    "t": 21,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 22,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 23,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 24,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 25,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 26,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 27,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 28,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 29,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 30,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 31,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 32,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 33,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 34,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 35,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 36,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 37,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 38,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 39,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 40,
+    "running": 2,
+    "arrival": [
+      1
+    ],
+    "dead": []
+  },
+  {
+    "t": 41,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 42,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 43,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 44,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 45,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 46,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 47,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 48,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 49,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 50,
+    "running": 2,
+    "arrival": [
+      2
+    ],
+    "dead": []
+  },
+  {
+    "t": 51,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 52,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 53,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 54,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 55,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 56,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 57,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 58,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 59,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 60,
+    "running": 1,
+    "arrival": [
+      1
+    ],
+    "dead": []
+  },
+  {
+    "t": 61,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 62,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 63,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 64,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 65,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 66,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 67,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 68,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 69,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 70,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 71,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 72,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 73,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 74,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 75,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 76,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 77,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 78,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 79,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 80,
+    "running": 1,
+    "arrival": [
+      1
+    ],
+    "dead": []
+  },
+  {
+    "t": 81,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 82,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 83,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 84,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 85,
+    "running": 2,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 86,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 87,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 88,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 89,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 90,
+    "running": 1,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 91,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 92,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 93,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 94,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 95,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 96,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 97,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 98,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  },
+  {
+    "t": 99,
+    "running": null,
+    "arrival": [],
+    "dead": []
+  }
+]

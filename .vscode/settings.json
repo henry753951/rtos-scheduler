@@ -1,0 +1,10 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#43233C",
+        "titleBar.activeBackground": "#5D3154",
+        "titleBar.activeForeground": "#FCF9FB"
+    },
+    "cSpell.words": [
+        "schedulability"
+    ]
+}
