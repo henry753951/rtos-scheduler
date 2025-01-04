@@ -2,10 +2,9 @@ use std::error::Error;
 use std::path::Path;
 use std::fs::{ self, create_dir_all, File };
 use std::io::{ BufReader, BufRead, Write };
-use std::cmp::min;
 use std::collections::HashSet;
 use plotters::prelude::*;
-use crate::structs::task::Task;
+use crate::structs::task::{ AperiodicTask, PeriodicTask, TaskTrait };
 use crate::structs::tick_info::TickInfo;
 
 /// 計算最大公因數 (GCD)
@@ -19,20 +18,29 @@ pub fn lcm(a: usize, b: usize) -> usize {
 }
 
 /// 計算所有任務的最大 Phase 時間
-pub fn max_phase(tasks: &Vec<Task>) -> usize {
+pub fn max_phase(tasks: &Vec<Box<dyn TaskTrait>>) -> usize {
     tasks
         .iter()
-        .map(|task| task.phase)
+        .filter(|task| !task.is_aperiodic()) // 只保留週期性任務
+        .map(|task| {
+            let periodic_task = task.as_any().downcast_ref::<PeriodicTask>().unwrap();
+            periodic_task.phase
+        })
         .max()
         .unwrap_or(0)
 }
-
 /// 計算所有任務週期的最小公倍數 (LCM)
-pub fn lcm_of_periods(tasks: &Vec<Task>) -> usize {
-    tasks.iter().fold(1, |acc, task| lcm(acc, task.period))
+pub fn lcm_of_periods(tasks: &Vec<Box<dyn TaskTrait>>) -> usize {
+    tasks
+        .iter()
+        .filter(|task| !task.is_aperiodic()) // 只保留週期性任務
+        .map(|task| {
+            let periodic_task = task.as_any().downcast_ref::<PeriodicTask>().unwrap();
+            periodic_task.period
+        })
+        .fold(1, |acc, period| lcm(acc, period as usize))
 }
 
-/// 讀取任務檔案名稱
 pub fn read_task_files(tasks_dir: &str) -> Vec<String> {
     fs::read_dir(tasks_dir)
         .expect("無法讀取目錄")
@@ -42,7 +50,10 @@ pub fn read_task_files(tasks_dir: &str) -> Vec<String> {
             if path.is_file() {
                 if let Some(ext) = path.extension() {
                     if ext == "txt" {
-                        return Some(path.to_str().unwrap().to_string());
+                        let mut path_str = path.to_str().unwrap().to_string();
+                        let ext_len = ext.to_str().unwrap().len() + 1; // 加上 '.' 的長度
+                        path_str.truncate(path_str.len() - ext_len);
+                        return Some(path_str);
                     }
                 }
             }
@@ -52,10 +63,48 @@ pub fn read_task_files(tasks_dir: &str) -> Vec<String> {
 }
 
 /// 讀取Task檔案
-pub fn read_tasks(filename: &str) -> Vec<Task> {
+pub fn read_tasks(filename: &str) -> Vec<Box<dyn TaskTrait>> {
+    let mut tasks = Vec::new();
+    // 讀取週期性任務
+    let periodic_tasks = read_tasks_periodic(&(filename.to_string() + ".txt"));
+    tasks.extend(periodic_tasks.into_iter());
+    // 讀取非週期性任務
+    let aperiodic_tasks = read_tasks_aperiodic(&(filename.to_string() + ".aperiodic.txt"));
+    tasks.extend(aperiodic_tasks.into_iter());
+    tasks
+}
+
+pub fn get_periodic_tasks(tasks: Vec<Box<dyn TaskTrait>>) -> Vec<PeriodicTask> {
+    tasks
+        .iter()
+        .filter(|task| !task.is_aperiodic()) // 只保留週期性任務
+        .map(|task| {
+            let periodic_task = task.as_any().downcast_ref::<PeriodicTask>().unwrap();
+            (*periodic_task).clone()
+        })
+        .collect()
+}
+
+pub fn get_aperiodic_tasks(tasks: Vec<Box<dyn TaskTrait>>) -> Vec<AperiodicTask> {
+    tasks
+        .iter()
+        .filter(|task| task.is_aperiodic()) // 只保留非週期性任務
+        .map(|task| {
+            let aperiodic_task = task.as_any().downcast_ref::<AperiodicTask>().unwrap();
+            (*aperiodic_task).clone()
+        })
+        .collect()
+}
+
+pub fn read_tasks_periodic(filename: &str) -> Vec<Box<dyn TaskTrait>> {
     let mut tasks = Vec::new();
 
-    let file = File::open(filename).expect("無法打開任務檔案");
+    let file = File::open(filename);
+    if file.is_err() {
+        eprintln!("無法打開{}任務檔案", filename);
+        return tasks;
+    }
+    let file = file.unwrap();
     let reader = BufReader::new(file);
 
     for (line_num, line) in reader.lines().enumerate() {
@@ -64,31 +113,99 @@ pub fn read_tasks(filename: &str) -> Vec<Task> {
         if line.is_empty() {
             continue;
         }
+
         let parts: Vec<&str> = line
             .split(',')
             .map(|s| s.trim())
             .collect();
-        if parts.len() != 4 {
+        if parts.len() == 4 {
+            let phase: usize = parts[0].parse().expect("無效的數字");
+            let period: usize = parts[1].parse().expect("無效的數字");
+            let relative_deadline: usize = parts[2].parse().expect("無效的數字");
+            let worst_case_execution_time: usize = parts[3].parse().expect("無效的數字");
+
+            let task: Box<dyn TaskTrait> = Box::new(PeriodicTask {
+                task_id: line_num + 1,
+                phase,
+                period,
+                worst_case_execution_time,
+                relative_deadline: relative_deadline,
+            });
+            tasks.push(task);
+        } else if parts.len() == 2 {
+            let period: usize = parts[0].parse().expect("無效的數字");
+            let worst_case_execution_time: usize = parts[1].parse().expect("無效的數字");
+
+            let task: Box<dyn TaskTrait> = Box::new(PeriodicTask {
+                task_id: line_num + 1,
+                phase: 0,
+                period,
+                worst_case_execution_time,
+                relative_deadline: worst_case_execution_time,
+            });
+            tasks.push(task);
+        } else {
             eprintln!("第 {} 行格式錯誤", line_num + 1);
             continue;
         }
-        let phase: usize = parts[0].parse().expect("無效的數字");
-        let period: usize = parts[1].parse().expect("無效的數字");
-        let relative_deadline: usize = parts[2].parse().expect("無效的數字");
-        let worst_case_execution_time: usize = parts[3].parse().expect("無效的數字");
-        let utilization =
-            (worst_case_execution_time as f64) / (min(period, relative_deadline) as f64);
-        let task = Task {
-            task_id: line_num + 1,
-            phase,
-            period,
-            worst_case_execution_time,
-            relative_deadline,
-            utilization,
-        };
-        tasks.push(task);
     }
+    tasks
+}
 
+pub fn read_tasks_aperiodic(filename: &str) -> Vec<Box<dyn TaskTrait>> {
+    let mut tasks = Vec::new();
+
+    let file = File::open(filename);
+    if file.is_err() {
+        eprintln!("無法打開{}任務檔案", filename);
+        return tasks;
+    }
+    let file = file.unwrap();
+    let reader = BufReader::new(file);
+
+    for (line_num, line) in reader.lines().enumerate() {
+        let line = line.unwrap();
+        let line = line.trim();
+        if line.is_empty() {
+            continue;
+        }
+
+        let parts: Vec<&str> = line
+            .split(',')
+            .map(|s| s.trim())
+            .collect();
+        if parts.len() == 2 {
+            // 解析各個字段
+            let arrival_time: usize = parts[0].parse().expect("無效的數字");
+            let worst_case_execution_time: usize = parts[1].parse().expect("無效的數字");
+
+            // 創建 AperiodicTask 並加入 tasks 向量
+            let task: Box<dyn TaskTrait> = Box::new(AperiodicTask {
+                task_id: line_num + 1,
+                arrival_time,
+                worst_case_execution_time,
+                relative_deadline: worst_case_execution_time,
+            });
+            tasks.push(task);
+        } else if parts.len() == 3 {
+            // 解析各個字段
+            let arrival_time: usize = parts[0].parse().expect("無效的數字");
+            let worst_case_execution_time: usize = parts[1].parse().expect("無效的數字");
+            let relative_deadline: usize = parts[2].parse().expect("無效的數字");
+
+            // 創建 AperiodicTask 並加入 tasks 向量
+            let task: Box<dyn TaskTrait> = Box::new(AperiodicTask {
+                task_id: line_num + 1,
+                arrival_time,
+                worst_case_execution_time,
+                relative_deadline: relative_deadline,
+            });
+            tasks.push(task);
+        } else {
+            eprintln!("第 {} 行格式錯誤", line_num + 1);
+            continue;
+        }
+    }
     tasks
 }
 

@@ -1,5 +1,5 @@
 use crate::scheduler::scheduler::Scheduler;
-use crate::structs::task::Task;
+use crate::structs::task::{PeriodicTask, TaskTrait};
 use crate::structs::job::Job;
 
 pub struct LSTScheduler;
@@ -9,11 +9,11 @@ impl Scheduler for LSTScheduler {
         "LSTScheduler"
     }
 
-    fn schedulability_test(&self, _tasks: &Vec<Task>) -> bool {
+    fn schedulability_test(&self, _tasks: &Vec<PeriodicTask>) -> bool {
         true // Strict LST 不做 Schedulability Test
     }
 
-    fn sort_ready_queue(&self, queue: &mut Vec<Job>, _tasks: &Vec<Task>, current_time: usize) {
+    fn sort_ready_queue(&self, queue: &mut Vec<Job>, _tasks: &Vec<PeriodicTask>, current_time: usize) {
         // 依 Slack 時間從小到大排序，Slack 相同則依 task_id 排序
         queue.sort_by(|a, b| {
             let slack_a =

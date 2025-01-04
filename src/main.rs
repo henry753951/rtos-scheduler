@@ -3,14 +3,21 @@ use std::path::Path;
 mod utils;
 mod structs;
 mod scheduler;
-
 use scheduler::scheduler::Scheduler;
 use scheduler::rm_scheduler::RMScheduler;
 use scheduler::edf_scheduler::EDFScheduler;
 use scheduler::lst_scheduler::LSTScheduler;
 use structs::{ job::Job, tick_info::TickInfo };
-use utils::{ lcm_of_periods, max_phase, read_task_files, read_tasks, write_output };
+use utils::{
+    get_periodic_tasks,
+    lcm_of_periods,
+    max_phase,
+    read_task_files,
+    read_tasks,
+    write_output,
+};
 
+use crate::structs::task::{ AperiodicTask, PeriodicTask, TaskTrait };
 fn main() {
     // 定義任務目錄
     let tasks_dir = "inputs/";
@@ -58,6 +65,7 @@ fn main() {
             let mut miss_deadline_job_number = 0;
 
             // SECTION [test]
+            let periodic_tasks = get_periodic_tasks(&tasks);
             if !scheduler.schedulability_test(&tasks) {
                 println!("\n🔥{}: 任務不可排程", scheduler_name);
                 let _ = write_output(scheduler_name, &task_file, &Vec::new());
@@ -81,6 +89,7 @@ fn main() {
                         (job.absolute_deadline as isize) -
                         (clock as isize) -
                         (job.remaining_execution_time as isize);
+
                     if remaining_time < 0 {
                         miss_deadline_job_number += 1;
                         to_remove_indices.push(i);
@@ -97,18 +106,28 @@ fn main() {
                 // SECTION [抵達處理]
                 // phase <= clock && (clock - phase) % period == 0
                 for task in &tasks {
-                    if clock >= task.phase && (clock - task.phase) % task.period == 0 {
-                        let job = Job {
-                            release_time: clock,
-                            remaining_execution_time: task.worst_case_execution_time,
-                            absolute_deadline: clock + task.relative_deadline,
-                            task_id: task.task_id,
-                        };
-                        ready_queue.push(job);
-                        total_job_number += 1;
+                    // is Periodic
+                    match task.is_aperiodic() {
+                        true => {}
+                        false => {
+                            let task = task
+                                .as_any()
+                                .downcast_ref::<structs::task::PeriodicTask>()
+                                .unwrap();
+                            if clock >= task.phase && (clock - task.phase) % task.period == 0 {
+                                let job = Job {
+                                    release_time: clock,
+                                    remaining_execution_time: task.worst_case_execution_time(),
+                                    task_id: task.task_id,
+                                    absolute_deadline: task.relative_deadline(),
+                                };
+                                ready_queue.push(job);
+                                total_job_number += 1;
 
-                        println!("\tt: {}, 抵達 task: {}", clock, task.task_id);
-                        arrivals.push(task.task_id);
+                                println!("\tt: {}, 抵達 task: {}", clock, task.task_id);
+                                arrivals.push(task.task_id);
+                            }
+                        }
                     }
                 }
 
