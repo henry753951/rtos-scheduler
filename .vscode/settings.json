@@ -1,10 +1,31 @@
 {
     "workbench.colorCustomizations": {
-        "activityBar.background": "#43233C",
-        "titleBar.activeBackground": "#5D3154",
-        "titleBar.activeForeground": "#FCF9FB"
+        "activityBar.background": "#0f1e5a",
+        "titleBar.activeBackground": "#442f7d",
+        "titleBar.activeForeground": "#FDF9F7"
     },
-    "cSpell.words": [
-        "schedulability"
-    ]
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+        }
+    },
+    "ruff.lint.args": [
+        "--config=pyproject.toml"
+    ],
+    "ruff.organizeImports": true,
+    "ruff.fixAll": true,
+    "editor.formatOnSave": true,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": true,
+        "scminput": false
+    },
+    "files.associations": {
+        "*.page-template": "vue",
+        "*.layout-template": "vue",
+        "*.vue": "vue",
+        "iostream": "cpp"
+    }
 }
