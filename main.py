@@ -36,7 +36,7 @@ def process_simulation(scheduler: CUSScheduler | TBSScheduler, input_path: str, 
         f.write(f"Test File: {test_file} Method: {method_name}\n")
         f.write(f"Miss Rate: {miss_rate:.10f}\n")
         f.write(f"Average Response Time: {avg_response_time:.10f}\n")
-        f.write(f"Finsihed Aperiodic Jobs: {simulator.finished_a_job_number}\n")
+        f.write(f"Finsihed Aperiodic Jobs: {simulator.finished_ajob_number}\n")
         f.write(f"Total Periodic Jobs: {simulator.total_pjob_number}\n")
         f.write(f"Total Missed Periodic Jobs: {simulator.miss_pjob_number}\n")
 
@@ -49,7 +49,7 @@ def process_simulation(scheduler: CUSScheduler | TBSScheduler, input_path: str, 
         "miss_rate": miss_rate,
         "avg_response_time": avg_response_time,
         "total_aperiodic_response_time": simulator.total_ajob_response_time,
-        "finished_a_job_number": simulator.finished_a_job_number,
+        "finished_ajob_number": simulator.finished_ajob_number,
         "total_periodic_jobs": simulator.total_pjob_number,
         "total_missed_periodic_jobs": simulator.miss_pjob_number,
     }

@@ -21,7 +21,7 @@ class Simulator:
         self.miss_pjob_number = 0
         self.total_pjob_number = 0
         self.finished_p_job_number = 0
-        self.finished_a_job_number = 0
+        self.finished_ajob_number = 0
         self.total_ajob_response_time = 0
 
         # 模擬數據
@@ -82,7 +82,7 @@ class Simulator:
                     if isinstance(selected_job, AperiodicJob):
                         self.aperiodic_ready_queue.remove(selected_job)
                         # Update the simulation indicators
-                        self.finished_a_job_number += 1
+                        self.finished_ajob_number += 1
                         response_time = self.current_time - selected_job.arrival_time + 1
                         self.total_ajob_response_time += response_time
                     elif isinstance(selected_job, PeriodicJob):
@@ -102,6 +102,6 @@ class Simulator:
         return Decimal(self.miss_pjob_number) / Decimal(self.total_pjob_number)
 
     def get_average_response_time(self) -> Decimal:
-        if self.finished_a_job_number == 0:
+        if self.finished_ajob_number == 0:
             return Decimal(0)
-        return self.total_ajob_response_time / Decimal(self.finished_a_job_number)
+        return self.total_ajob_response_time / Decimal(self.finished_ajob_number)
