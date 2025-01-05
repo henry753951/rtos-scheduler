@@ -59,22 +59,22 @@ class CUSScheduler(Scheduler):
             self.server_execution_time -= 1
 
         # Print the selected job
-        if isinstance(selected_job, PeriodicJob):
-            print(
-                f"😊 Executing periodic job {selected_job.job_id} at {self.simulator.current_time} with deadline {selected_job.absolute_deadline}",
-            )
-        elif isinstance(selected_job, AperiodicJob):
-            print(
-                f"❤️ Executing aperiodic job {selected_job.job_id} at {self.simulator.current_time}",
-            )
-            if self.simulator.periodic_ready_queue:
-                print(
-                    f"\t Server Deadline: {self.server_deadline}, Periodic Job {self.simulator.periodic_ready_queue[0].job_id } Deadline: {self.simulator.periodic_ready_queue[0].absolute_deadline}",
-                )
-            else:
-                print(
-                    f"\t Server Deadline: {self.server_deadline}, No periodic job in the queue",
-                )
+        # if isinstance(selected_job, PeriodicJob):
+        #     print(
+        #         f"😊 Executing periodic job {selected_job.job_id} at {self.simulator.current_time} with deadline {selected_job.absolute_deadline}",
+        #     )
+        # elif isinstance(selected_job, AperiodicJob):
+        #     print(
+        #         f"❤️ Executing aperiodic job {selected_job.job_id} at {self.simulator.current_time}",
+        #     )
+        #     if self.simulator.periodic_ready_queue:
+        #         print(
+        #             f"\t Server Deadline: {self.server_deadline}, Periodic Job {self.simulator.periodic_ready_queue[0].job_id } Deadline: {self.simulator.periodic_ready_queue[0].absolute_deadline}",
+        #         )
+        #     else:
+        #         print(
+        #             f"\t Server Deadline: {self.server_deadline}, No periodic job in the queue",
+        #         )
         return selected_job
 
     def _choose_job(

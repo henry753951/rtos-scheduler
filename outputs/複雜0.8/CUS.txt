@@ -1,0 +1,6 @@
+Test File: 複雜0.8 Method: CUS
+Miss Rate: 0.0000000000
+Average Response Time: 300.1764706000
+Finsihed Aperiodic Jobs: 34
+Total Periodic Jobs: 233
+Total Missed Periodic Jobs: 0

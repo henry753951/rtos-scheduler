@@ -1,0 +1,6 @@
+Test File: word Method: TBS
+Miss Rate: 0.0011976048
+Average Response Time: 19.3333333300
+Finsihed Aperiodic Jobs: 3
+Total Periodic Jobs: 835
+Total Missed Periodic Jobs: 1

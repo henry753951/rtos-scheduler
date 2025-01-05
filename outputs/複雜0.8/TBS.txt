@@ -1,0 +1,6 @@
+Test File: 複雜0.8 Method: TBS
+Miss Rate: 0.0000000000
+Average Response Time: 313.8913043000
+Finsihed Aperiodic Jobs: 46
+Total Periodic Jobs: 233
+Total Missed Periodic Jobs: 0

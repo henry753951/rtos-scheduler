@@ -1,12 +1,16 @@
 # simulation/simulator.py
 import heapq
+from decimal import Decimal, getcontext
 
 from models.jobs import AperiodicJob, PeriodicJob
 from schedulers.scheduler import Scheduler
 
+# 設定精度
+getcontext().prec = 10  # 可根據需求調整精度
+
 
 class Simulator:
-    def __init__(self, scheduler: Scheduler, max_sim_time: int = 1000) -> None:
+    def __init__(self, scheduler: Scheduler, max_sim_time: int = 3000) -> None:
         self.scheduler = scheduler
         self.scheduler.simulator = self
         # 模擬參數
@@ -92,12 +96,12 @@ class Simulator:
             # Clock tick +1
             self.current_time += 1
 
-    def get_miss_rate(self) -> float:
+    def get_miss_rate(self) -> Decimal:
         if self.total_pjob_number == 0:
-            return 0.0
-        return self.miss_pjob_number / self.total_pjob_number
+            return Decimal(0)
+        return Decimal(self.miss_pjob_number) / Decimal(self.total_pjob_number)
 
-    def get_average_response_time(self) -> float:
+    def get_average_response_time(self) -> Decimal:
         if self.finished_a_job_number == 0:
-            return 0.0
-        return self.total_ajob_response_time / self.finished_a_job_number
+            return Decimal(0)
+        return self.total_ajob_response_time / Decimal(self.finished_a_job_number)
